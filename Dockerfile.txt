@@ -1,7 +1,6 @@
-FROM node:12-alpine
-RUN apk add --no-cache python2 g++ make
-WORKDIR /app
+FROM python:3.10.5-slim-bullseye
+RUN mkdir /xd
+WORKDIR /xd
 COPY . .
-RUN npm install --production
-CMD ["node", "app.js"]
-EXPOSE 80
+RUN apt update; apt install -yy apache2; pip3 install -r requirements.txt
+CMD ["bash","run.sh"]
